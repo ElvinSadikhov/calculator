@@ -65,4 +65,6 @@ def calculation(line):
             flag=-1
     return result
 line=input("Type needed camputations:\n")
+line=input("Type needed camputations:\n")
+line=input("Type needed camputations:\n")
 print("Result is:\n",calculation(line))
