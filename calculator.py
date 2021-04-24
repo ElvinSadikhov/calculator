@@ -37,7 +37,7 @@ def calculation(line):
             else:
                 operation=int(new[i-1])*int(new[i+1])
                 result+=operation
-                flag=1
+                flag=1           
         if new[i]=="/":
             if flag==1:
                 result=result-operation+operation/int(new[i+1])
@@ -64,6 +64,5 @@ def calculation(line):
             result+=operation
             flag=-1
     return result
-line=input("Type needed camputations:\n")
 line=input("Type needed camputations:\n")
 print("Result is:\n",calculation(line))
