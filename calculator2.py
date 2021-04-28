@@ -44,7 +44,10 @@ def stack(lst):
                 stack.append(NumOp)
             else:###
                 stack.append(NumOp)
-    return massiv_vixoda+stack
+    if len(stack)>0:
+        for i in range(len(stack)-1,-1,-1):
+            massiv_vixoda+=[stack[i]]
+    return massiv_vixoda
 
 def Prioritet(operation):
     if operation in ["*","/"]:
