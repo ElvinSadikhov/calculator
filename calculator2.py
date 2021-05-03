@@ -17,7 +17,9 @@ def upgradeLine(line):
             else:
                 lst+=[letter]
             number=""
-    lst+=[int(number)]
+    #print(number)
+    if number!="":
+        lst+=[int(number)]
     return lst
 
 def stack(lst):
@@ -37,16 +39,28 @@ def stack(lst):
                 stack.pop()
             elif len(stack)==0:
                 stack.append(NumOp)
-            elif Prioritet(stack[-1])>=Prioritet(NumOp):
-                massiv_vixoda.append(stack.pop())
+            elif Prioritet(stack[-1])> Prioritet(NumOp):
+                flag=0
+                for i in range(len(stack)-1,-1,-1):
+                    if Prioritet(stack[i])>Prioritet(NumOp) and flag==0:
+                        massiv_vixoda+=stack.pop(i)
+                    else:
+                        flag=1
+                stack.append(NumOp)
+            elif Prioritet(stack[-1])== Prioritet(NumOp):
+                flag=0
+                for i in range(len(stack)-1,-1,-1):
+                    if Prioritet(stack[i])==Prioritet(NumOp) and flag==0:
+                        massiv_vixoda+=stack.pop(i)
+                    else:
+                        flag=1
                 stack.append(NumOp)
             elif Prioritet(stack[-1])<Prioritet(NumOp):
                 stack.append(NumOp)
             else:###
                 stack.append(NumOp)
-    if len(stack)>0:
-        for i in range(len(stack)-1,-1,-1):
-            massiv_vixoda+=[stack[i]]
+    for i in range(len(stack)-1,-1,-1):
+        massiv_vixoda+=stack[i]
     return massiv_vixoda
 
 def Prioritet(operation):
@@ -72,8 +86,13 @@ def calculation(lst):
             if NumOp=="*":
                 newlst.append(num1*num2)
             if NumOp=="/":
-                newlst.append(num1/num2)
+                if num2==0:
+                    print("DIVISON BY ZERO!")
+                    return
+                else:
+                    newlst.append(num1/num2)
     return newlst[0]
 
 line=input("Type your calculation:")
-print(calculation(stack(upgradeLine(line))))
+if not calculation(stack(upgradeLine(line))) is None:
+    print(calculation(stack(upgradeLine(line))))
